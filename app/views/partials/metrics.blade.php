@@ -18,15 +18,15 @@
                     @endif
                 </h4>
             </div>
-            <div class="col-xs-2 text-right">
+            <!--<div class="col-xs-2 text-right">
                 <small>{{ trans('cachet.metrics.filter.hourly') }}</small>
-            </div>
+            </div>-->
         </div>
         <hr>
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <canvas id="metric-{{ $metric->id }}" height="150" width="600"></canvas>
+                    <canvas id="metric-{{ $metric->id }}" height="80" width="600"></canvas>
                 </div>
             </div>
         </div>
@@ -57,6 +57,7 @@
                 var ctx = document.getElementById("metric-{{ $metric->id }}").getContext("2d");
                 new Chart(ctx).Line(data, {
                     scaleShowVerticalLines: true,
+                    scaleShowLabels: false,
                     pointDot: false,
                     responsive: true
                 });
