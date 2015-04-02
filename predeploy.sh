@@ -14,8 +14,8 @@ COMMIT=$2
 rsync -az --delete --exclude="build/" ./ $BUILD_USER@$BUILD_SERVER:$BUILD_PATH/
 
 # Build
-#ssh $BUILD_USER@$BUILD_SERVER "cd $BUILD_PATH; npm install"
-#ssh $BUILD_USER@$BUILD_SERVER "cd $BUILD_PATH; grunt --env=$ENVIRONMENT --dest-site=dist --dest-assets=assets"
+ssh $BUILD_USER@$BUILD_SERVER "cd $BUILD_PATH; [[ -f composer.phar ]] || curl -sS https://getcomposer.org/installer | php"
+ssh $BUILD_USER@$BUILD_SERVER "cd $BUILD_PATH; ./composer.phar install --no-dev -o"
 
 # Retrieve build
 if [ -d build ]; then
