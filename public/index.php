@@ -1,4 +1,16 @@
 <?php
+/*
+ * Caching
+ * crontab line to generate cache file:
+   * *     * * *   curl 'http://status.withings.com/?force' > /tmp/cachethq.main.html.tmp; mv -T /tmp/cachethq.main.html.tmp /tmp/cachethq.main.html
+ */
+$cached_fn = "/tmp/cachethq.main.html";
+$uris = explode("?", $_SERVER["REQUEST_URI"]);
+if( $uris[0] == "/" && !isset($_GET["force"]) && file_exists($cached_fn) ) {
+        echo file_get_contents($cached_fn);
+        exit();
+}
+
 /**
  * Laravel - A PHP Framework For Web Artisans.
  *
