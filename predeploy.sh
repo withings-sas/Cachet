@@ -11,7 +11,7 @@ ENVIRONMENT=$1
 COMMIT=$2
 
 # Sync source
-rsync -az --delete --exclude="build/" ./ $BUILD_USER@$BUILD_SERVER:$BUILD_PATH/
+rsync -az --delete --exclude="vendor/" ./ $BUILD_USER@$BUILD_SERVER:$BUILD_PATH/
 
 # Build
 ssh $BUILD_USER@$BUILD_SERVER "cd $BUILD_PATH; [[ -f composer.phar ]] || curl -sS https://getcomposer.org/installer | php"
@@ -22,5 +22,5 @@ if [ -d build ]; then
   rm -rf build
 fi
 mkdir build
-#rsync -az $BUILD_USER@$BUILD_SERVER:$BUILD_PATH/ build/
+rsync -az --delete $BUILD_USER@$BUILD_SERVER:$BUILD_PATH/vendor/ vendor/
 
